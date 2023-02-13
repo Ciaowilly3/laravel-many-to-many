@@ -44,7 +44,7 @@
                     {{ $message }}
                   </div>
                 @enderror
-              </div>
+            </div>
             <div class="mb-3">
                 <label class="form-label">Tipo</label>
                 <select name="type_id" class="w-75 mx-auto form-select @error('type_id') is-invalid @enderror">

@@ -81,8 +81,9 @@ class ProjectController extends Controller
     {
         $project = Project::findOrFail($id);
         $types = Type::all();
+        $technologies = Technology::all();
 
-        return view('admin.projects.edit', compact('project', 'types'));
+        return view('admin.projects.edit', compact('project', 'types', 'technologies'));
     }
 
     /**
@@ -100,9 +101,12 @@ class ProjectController extends Controller
         if(key_exists('cover_img', $data)){
             $path= Storage::put('covers', $data['cover_img']);
             Storage::delete($project->cover_img);
+            $data['cover_img'] = $path;
         }
-        $data['cover_img'] = $path;
+        
         $project->update($data);
+
+        $project->technologies()->sync($data['technologies']);
 
         return redirect()->route('admin.projects.index');
     }
