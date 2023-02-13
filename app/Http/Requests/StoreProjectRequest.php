@@ -28,7 +28,8 @@ class StoreProjectRequest extends FormRequest
             'description' =>'required|string',
             'cover_img' =>'required|image',
             'git_link' =>'required|url',
-            "type_id" => "nullable|exists:types,id"
+            "type_id" => "nullable|exists:types,id",
+            'technologies' =>'nullable|array|exists:technologies,id'
         ];
     }
     public function messages() {

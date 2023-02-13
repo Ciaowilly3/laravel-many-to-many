@@ -27,6 +27,25 @@
                 @enderror
             </div>
             <div class="mb-3">
+                @foreach ($technologies as $technology)
+                  <div class="form-check form-check-inline @error('technologies') is-invalid @enderror">
+                    {{-- Il name dell'input ha come suffisso le quadre [] che indicheranno al server,
+                          di creare un array con i vari technology che stiamo inviando --}}
+                    <input class="form-check-input @error('technologies') is-invalid @enderror" type="checkbox"
+                      id="technologyCheckbox_{{ $loop->index }}" value="{{ $technology->id }}" name="technologies[]"
+                      {{ in_array( $technology->id, old('technologies', [])) ? 'checked' : '' }}
+                      >
+                    <label class="form-check-label" for="technologyCheckbox_{{ $loop->index }}">{{ $technology->name }}</label>
+                  </div>
+                @endforeach
+    
+                @error('technologys')
+                  <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+                @enderror
+              </div>
+            <div class="mb-3">
                 <label class="form-label">Tipo</label>
                 <select name="type_id" class="w-75 mx-auto form-select @error('type_id') is-invalid @enderror">
                 <option></option>

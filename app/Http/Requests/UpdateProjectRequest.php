@@ -28,7 +28,8 @@ class UpdateProjectRequest extends FormRequest
             'description' =>'string',
             'cover_img' =>'image',
             'git_link' =>'url',
-            "type_id" => "nullable|exists:types,id"
+            "type_id" => "nullable|exists:types,id",
+            'technologies' =>'nullable|array|exists:technologies,id'
         ];
     }
     public function messages() {
